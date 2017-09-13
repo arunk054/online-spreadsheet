@@ -1,0 +1,25 @@
+State Variable
+==============
+
+
+Purpose
+-------
+
+A state variable manages the state.  It attaches conditions
+to the state.
+
+Construction
+------------
+
+StateVar.make(name : String, initVal: Any) : StateVarInstance
+
+
+Interaction
+-----------
+
+getVal() : Any
+setVal(v : Any) : void
+setCondition(c : Condition) : void
+addHandler(conditionName : String, h : Handler) : void
+
+

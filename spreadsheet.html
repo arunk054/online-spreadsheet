@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>My Spread Sheet Using JS</title>
+
+    <link rel="stylesheet" type="text/css" href="./spreadsheet_code/ss-impl/ss.css" />
+
+<link rel="stylesheet" type="text/css" href="./spreadsheet_code/yui-libs/fonts-min.css" />
+<!-- commented this because, everything seems to get centered with this -->
+<!--<link rel="stylesheet" type="text/css" href="./spreadsheet_code/yui-libs/reset-fonts-grids.css" />-->
+<link rel="stylesheet" type="text/css" href="./spreadsheet_code/yui-libs/menu.css" />
+<link rel="stylesheet" type="text/css" href="./spreadsheet_code/yui-libs/button.css" />
+<link rel="stylesheet" type="text/css" href="./spreadsheet_code/yui-libs/container.css" />
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/animation-min.js"></script>
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/dragdrop-min.js"></script>
+
+<!--<script type="text/javascript" src="./spreadsheet_code/yui-libs/container_core-min.js"></script>-->
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/container-min.js"></script>
+
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/menu-min.js"></script>
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/element-min.js"></script>
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/button-min.js"></script>
+<script type="text/javascript" src="./spreadsheet_code/yui-libs/connection-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+
+    /*
+        Set the "zoom" property to "normal" since it is set to "1" by the 
+        ".example-container .bd" rule in yui.css and this causes a Menu
+        instance's width to expand to 100% of the browser viewport.
+    */
+    
+    div.yuimenu .bd {
+    
+        zoom: normal;
+    
+    }
+
+    fieldset {
+
+        border: 2px groove #ccc;
+        margin: .5em;
+        padding: .5em;
+
+    }
+
+    #insDelMenuItem {
+    
+        position: absolute;
+        visibility: hidden;
+        border: solid 1px #000;
+        padding: .5em;
+        background-color: #ccc;
+    
+    }
+ 	.file-open-dialog {
+	    display:none;
+	}
+}
+</style>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/object-utils/instantiate/instantiate.js">
+    </script>
+
+    <script type ="text/javascript" 
+	    src="./spreadsheet_code/object-utils/properties/properties.js"></script>
+
+    <script type ="text/javascript" 
+	    src="./spreadsheet_code/collections/arrays/array.js"></script>
+
+    <script type ="text/javascript" 
+	    src="./spreadsheet_code/collections/sets/Set.js"></script>
+
+    <script type ="text/javascript"
+	    src="./spreadsheet_code/unit-testing/fireunit/driver.js"></script>
+
+    <script type ="text/javascript" 
+	    src="./spreadsheet_code/formula/exp.js"></script>
+
+    <script type ="text/javascript" 
+	    src="./spreadsheet_code/jsparse/jsparse-arun.js"></script>
+
+    <script type ="text/javascript"
+            src="./spreadsheet_code/dom/dom.js">
+    </script>
+
+    <script type ="text/javascript"
+            src="./spreadsheet_code/mvc/handler/handler.js">
+    </script>
+
+    <script type ="text/javascript"
+            src="./spreadsheet_code/mvc/condition/condition.js">
+    </script>
+
+    <script type ="text/javascript"
+            src="./spreadsheet_code/mvc/state-var/state-var.js">
+    </script>
+
+    <script type ="text/javascript"
+            src="./spreadsheet_code/mvc/state-vector/state-vector.js">
+    </script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/cell.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/cellref-exp.js"></script>
+
+    <script type ="text/javascript" 
+	    src="./spreadsheet_code/formula-parsing/grammar.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/editor.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/cell-view.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/input-controller.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/row-header.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/row-header-view.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/col-header.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/col-header-view.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/ss.js"></script>
+
+    <script type ="text/javascript" 
+            src="./spreadsheet_code/ss-impl/ss-view.js"></script>
+
+    <script type ="text/javascript"
+            src="./spreadsheet_code/ss-impl/system.js"></script>
+
+   <script type ="text/javascript"
+            src="./spreadsheet_code/pow-ajax/jquery-1.3.2.js"></script>
+
+   <script type ="text/javascript"
+            src="./spreadsheet_code/pow-ajax/json2.js"></script>
+
+   <script type ="text/javascript"
+            src="./spreadsheet_code/ss-impl/menus/menu-handler.js"></script>
+
+  </head>
+<body class="yui-skin-sam">
+<script type="text/javascript">
+
+	YAHOO.util.Event.onContentReady("ss-menus", function () {
+
+		//	Create a Button using an existing <input> and <select> element.
+		//	Because the "type" attribute of the <input> element was set to 
+		//	"submit" - clicking on any MenuItem in the Button's Menu will
+		//	automatically submit the Button's parent <form>.
+
+		var fileMenuButton = new YAHOO.widget.Button("fileMenu", 
+								{ type: "menu", menu: "fileSelect" });
+		
+
+		//	"render" event handler for the Button's Menu
+
+		var fileMenuRender = function (p_sType, p_aArgs) {
+			this.addItems([
+
+				{ text: "New", value: 1, onclick: { fn: onClickNew } },
+				{ text: "Open", value: 2, onclick: { fn: onClickOpen } },
+				{ text: "Save", value: 3, onclick: { fn: onClickSave } },
+				{ text: "Save As", value: 4, onclick: { fn: onClickSaveAs } },
+				{ text: "Exit", value: 5, onclick : { fn: onClickExit} }
+
+			]);
+			this.removeItem(this.getItem(0));
+			
+		};
+
+
+		//	Add some additional MenuItems to the Button's Menu once it has 
+		//	been rendered
+		
+		fileMenuButton.getMenu().subscribe("render", fileMenuRender);
+
+		//This is for creating the insert menu button
+		var insMenuButton = new YAHOO.widget.Button("insMenu", 
+								{ type: "menu", menu: "insSelect" });
+
+		var insMenuRender = function (p_sType, p_aArgs) {
+			this.addItems([
+
+				{ text: "Insert Row at end", value: 1, onclick: { fn: onClickInsRow } },
+				{ text: "Insert Column at end", value: 2, onclick : { fn: onClickInsCol}  },
+				{ text: "Insert at specific row / column", value: 3, onclick : { fn: onClickInsSpecific}  }
+
+			]);
+			this.removeItem(this.getItem(0));
+			
+		};
+		
+		insMenuButton.getMenu().subscribe("render", insMenuRender);
+
+		//This is for creating the delete menu button
+		var delMenuButton = new YAHOO.widget.Button("delMenu", 
+								{ type: "menu", menu: "delSelect" });
+
+		var delMenuRender = function (p_sType, p_aArgs) {
+			this.addItems([
+
+				{ text: "Delete last Row", value: 1, onclick: { fn: onClickDelRow } },
+				{ text: "Delete last Column", value: 2, onclick : { fn: onClickDelCol}  },
+				{ text: "Delete specific row / column", value: 3, onclick : { fn: onClickDelSpecific}  }
+
+			]);
+			this.removeItem(this.getItem(0));
+			
+		};
+		
+		delMenuButton.getMenu().subscribe("render", delMenuRender);
+
+		//Following is for creting the Help menu button
+		var helpMenuButton = new YAHOO.widget.Button("helpMenu", 
+								{ type: "menu", menu: "helpSelect" });
+		
+		var helpMenuRender = function (p_sType, p_aArgs) {
+			this.addItems([
+
+				{ text: "Contents", value: 1, onclick: { fn: onClickContents } },
+				{ text: "About", value: 2, onclick : { fn: onClickAbout}  }
+
+			]);
+			this.removeItem(this.getItem(0));
+			
+		};
+		
+		helpMenuButton.getMenu().subscribe("render", helpMenuRender);
+
+		
+	});
+
+
+</script>
+<center><h4>Welcome to My Spread Sheet</h4></center>
+<center><h4 id = "heading">File Name : </h4></center>
+<fieldset id="ss-menus">
+	<legend>Menu</legend>
+	  <input type="submit" id="fileMenu" name="fileMenu_name" value="File">
+	 <select id="fileSelect" name="fileSelect_name">
+	<!--This will be removed on render-->
+	  <option value="0">dummy</option>
+	 </select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" id="insMenu" name="insMenu_name" value="Insert">
+	 <select id="insSelect" name="insSelect_name">
+	  <option value="0">dummy</option>
+	 </select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="button" id="delMenu" name="delMenu_name" value="Delete">
+	 <select id="delSelect" name="delSelect_name">
+	  <option value="0">dummy</option>
+	 </select>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	  <input type="submit" id="helpMenu" name="helpMenu_name" value="Help">
+	 <select id="helpSelect" name="helpSelect_name">
+	  <option value="0">dummy</option>
+	 </select>
+
+</fieldset>
+
+
+    <script type ="text/javascript">
+		System.ss = System.make();
+		SSView.make(System.ss);
+    </script>
+
+<!-- Markup for the file dialog-->
+<div id="fileOpenDialog" class="file-open-dialog">
+<div class="hd">Please enter your information</div>
+<div class="bd">
+<form>
+<br>
+	<center><i><label for="fileNames">Select an existing File: </label></i><center>
+	<select id = "fileNames" name="fileNames" size = "4" style="width:25em;">
+		
+	</select> 
+
+	<H3><center> OR <center></H3>
+
+	<label for="newFileName"><i>Enter a new File Name: </i></label><input type="textbox" name="newFileName" />
+<br><br>
+<center><div id="loadingDiv"  style=" display: none"><img src="spreadsheet_code/images/loading.gif" id="loading"></div></center>
+</form>
+</div>
+</div>
+</body>
+
+
+
+</html>
+
+

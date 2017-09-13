@@ -1,0 +1,15 @@
+Two kinds of cells and their views
+
+* Header cells: these are not editable, they display the
+  header (row or col) number.
+
+** Row cells
+** Col cells
+
+
+* Data cells: these are formula-result cells with editor views.
+
+
+
+
+

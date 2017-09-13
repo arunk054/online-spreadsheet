@@ -1,0 +1,86 @@
+Homework/Mini Project:
+
+Spreadsheet with  dataflow and persistence
+==========================================
+
+In this  last part of the spreadsheet, you need to implement the following 3 features:
+
+1. Dataflow:
+
+a. Computation of dependencies of cells based on occurrence
+   of those cells in the formula.  
+
+b. Updating of dependencies when a formula changes
+
+c. Flagging circular dependencies and rejecting any formula
+   that causes circularity to appear. 
+
+
+2. Recomputation of formulas in the presence of addition/deletion of rows.
+
+a. Implement a new operation called (sum <index1> <index2>)
+   where index1 and index2 are co-axial (share the same row
+   or same column). The formula using sum should
+   automatically be readjusted if a row or column in the
+   middle of the <index1>...<index.2> is added/deleted.
+
+b. Flag a formula cell as error when a row or column
+   containing the cell whose address in a formula is deleted.
+   [You should simulate the behaviour of what happens in Open
+   office.  Try it out.]
+
+3. Persistence of spreadsheet.  
+
+a. Save the entire spreadsheet data structure 
+
+b. Reread the spreadsheet back into the browser and ensure
+   that everything works as before.
+
+c. (Optional) periodic saving of spreadsheet using AJAX.
+
+
+Note: 
+
+1. You may either submit this and the previous homework as
+   separate submissions (to get partial credit), or submit one
+   complete final mini project.
+
+2. Feel free to discuss the problems on the net.  This is
+   part of an exam.  Needless to say, I expect nothing but
+   the highest standards of personal integrity from each of
+   you.  You should consult each other as much as possible,
+   and carry out the discussion in the open on the
+   pas-course newsgroup, but do the implementation yourself.
+
+   I dare say the implementation will be a life changing
+   event for you.
+
+This and the previous homework together will carry a total of
+
+5% from the quiz weightage
+5% from the  homework weightage
+10% from final exam  (written exam is now worth 20%)
+
+i.e., a total of 20% of the grade for the stream that I
+taught.
+
+SUBMISSION IS MANDATORY,  even if you do not complete the
+implementation!  
+
+The deadline is 11:59pm first day of classes next semester.
+
+I expect the google group to be active.  I will be tuned in
+to it. I look forward to your questions, and answers.  
+
+Happy Holidays!
+
+Sincerely,
+
+- venkatesh
+
+
+
+
+
+
+

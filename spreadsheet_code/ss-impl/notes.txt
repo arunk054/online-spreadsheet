@@ -1,0 +1,2 @@
+Cell now has an evalExp interface.
+Redefine Exp's signature of evalExp so that it now takes a spreadshet. 

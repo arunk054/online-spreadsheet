@@ -1,0 +1,29 @@
+Condition
+=========
+
+Purpose
+-------
+
+A condition holds a name and a predicate, and a list of handlers
+
+Construction
+------------
+
+Condition.make(name: String, pred: Predicate) : ConditionInstance
+
+Interaction
+-----------
+
+getName() : String
+getPredicate() : Function
+addHandler(h: Handler) : void
+runHandlers() : void
+
+
+Invariant
+---------
+
+
+
+
+

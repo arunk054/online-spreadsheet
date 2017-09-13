@@ -1,0 +1,16 @@
+Handler
+=======
+
+
+Construction
+------------
+
+Handler.make(name: String, func: Function) : HandlerInstance
+
+Interaction
+-----------
+
+getName() : String
+getFunction() : Function
+
+

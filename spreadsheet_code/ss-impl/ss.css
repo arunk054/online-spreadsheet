@@ -1,0 +1,7 @@
+table  { 
+   margin: 1em; 
+   border-collapse: collapse; 
+   border: thin solid silver;
+}
+th { padding: 0.1em; border: 1px #ccc solid; }
+td { padding: 0.1em; border: 1px #ccc solid; }

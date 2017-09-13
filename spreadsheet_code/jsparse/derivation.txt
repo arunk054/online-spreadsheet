@@ -1,0 +1,19 @@
+Expr ::= Sum
+Sum  ::= Product 
+Product ::= Value 
+Value ::= 25
+
+...
+
+25
+
+
+
+Expr ::= Sum
+ ::=      Product + Product
+ ::=      Value   + Product
+ ::=      25      + Product
+ ::=      25      + Value
+ ::=      25      + 3  
+
+
